@@ -48,20 +48,18 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         Grid {
-            ForEach(0..<5) { rowIndex in
-                GridRow {
-                    Text("Item \(rowIndex)")
-                    Text("Description \(rowIndex)")
-                }
-                .accessibilityRepresentation {
-                    VStack {
-                        Color.clear
-                            .accessibilityLabel("Item \(rowIndex), Description \(rowIndex)")
-                    }
+            ForEach(dataFromViewModel) {
+                gridRow(title: $0.value)
+            }
+        }
+        .accessibilityRepresentation {
+            VStack(spacing: 0) {
+                ForEach(dataFromViewModel) {
+                    Color.clear
+                        .accessibilityLabel($0.accessibilityValue)
                 }
             }
         }
-        .padding()
     }
 }
 ```
